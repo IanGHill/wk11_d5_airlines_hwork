@@ -68,15 +68,23 @@ public class FlightManagerTest {
   }
 
   @Test
-  public void canSortAllocatedSeats(){
+  public void canSortPassengersBySeatNumber(){
     eb420.bookPassenger(dave);
     eb420.bookPassenger(clarissa);
     eb420.bookPassenger(hammy);
+    System.out.println("Before Sort:");
+    System.out.println("Passenger: " + eb420.getBookedPassengers().get(0).getName() + " Seat Num: " + eb420.getBookedPassengers().get(0).getSeatNumber()  );
+    System.out.println("Passenger: " + eb420.getBookedPassengers().get(1).getName() + " Seat Num: " + eb420.getBookedPassengers().get(1).getSeatNumber()  );
+    System.out.println("Passenger: " + eb420.getBookedPassengers().get(2).getName() + " Seat Num: " + eb420.getBookedPassengers().get(2).getSeatNumber()  );
+    flightManager.getSortedPassengersBySeatNum(eb420);
+    System.out.println("After Sort:");
+    System.out.println("Passenger: " + eb420.getBookedPassengers().get(0).getName() + " Seat Num: " + eb420.getBookedPassengers().get(0).getSeatNumber()  );
+    System.out.println("Passenger: " + eb420.getBookedPassengers().get(1).getName() + " Seat Num: " + eb420.getBookedPassengers().get(1).getSeatNumber()  );
+    System.out.println("Passenger: " + eb420.getBookedPassengers().get(2).getName() + " Seat Num: " + eb420.getBookedPassengers().get(2).getSeatNumber()  );
     testAllocatedSeats.add(1);
     testAllocatedSeats.add(2);
     testAllocatedSeats.add(3);
-    assertEquals(testAllocatedSeats, flightManager.getSortedAllocatedSeats(eb420));
-//    assertEquals(testAllocatedSeats, flightManager.getSortedAllocatedSeats(eb420));
+    assertEquals(testAllocatedSeats, flightManager.getFlightAllocatedSeats(eb420));
   }
 
   @Test
@@ -84,8 +92,20 @@ public class FlightManagerTest {
     eb420.bookPassenger(dave);
     eb420.bookPassenger(clarissa);
     eb420.bookPassenger(hammy);
-    assertEquals(dave, eb420.getPassengerBySeatNumber(dave.getSeatNumber()));
+    assertEquals(dave, flightManager.getPassengerBySeatNumber(eb420, dave.getSeatNumber()));
+    assertEquals(clarissa, flightManager.getPassengerBySeatNumber(eb420, clarissa.getSeatNumber()));
+    assertEquals(hammy, flightManager.getPassengerBySeatNumber(eb420, hammy.getSeatNumber()));
+  }
 
+  @Test
+  public void NoPassengerInThatSeat(){
+    eb420.bookPassenger(dave);
+    eb420.bookPassenger(clarissa);
+    eb420.bookPassenger(hammy);
+    assertEquals(dave, flightManager.getPassengerBySeatNumber(eb420, dave.getSeatNumber()));
+    assertEquals(clarissa, flightManager.getPassengerBySeatNumber(eb420, clarissa.getSeatNumber()));
+    assertEquals(hammy, flightManager.getPassengerBySeatNumber(eb420, hammy.getSeatNumber()));
+    assertEquals(null, flightManager.getPassengerBySeatNumber(eb420, 4));
   }
 
 }

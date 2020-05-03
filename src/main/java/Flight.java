@@ -15,7 +15,6 @@ public class Flight {
   private Random randomNum;
   private Boolean freeSeat;
   private ArrayList<Integer> allocatedSeats;
-  private ArrayList<Integer> allocatedSeatsAscending;
 
   public Flight(PlaneType planeType, String flightNum, String departure, String destination, Date departureTime) {
     this.planeType = planeType;
@@ -99,24 +98,75 @@ public class Flight {
     return this.allocatedSeats;
   }
 
-  public ArrayList<Integer> getAllocatedSeatsAscending() {
-    int temp;
-    for (int i = 0; i < allocatedSeats.size() - 1; i++) {
+//  public ArrayList<Integer> getAllocatedSeatsAscending() {
+//    int temp;
+//    for (int i = 0; i < allocatedSeats.size() - 1; i++) {
+//
+//      for (int j = 1; j < allocatedSeats.size() - i; j++) {
+//        if (allocatedSeats.get(j - 1) > allocatedSeats.get(j)) {
+//          temp = allocatedSeats.get(j-1);
+//          allocatedSeats.set((j-1), allocatedSeats.get(j));
+//          allocatedSeats.set(j, temp);
+//        }
+//      }
+//    }
+//    return allocatedSeats;
+//
+//  }
 
-      for (int j = 1; j < allocatedSeats.size() - i; j++) {
-        if (allocatedSeats.get(j - 1) > allocatedSeats.get(j)) {
-          temp = allocatedSeats.get(j-1);
+  public ArrayList<Passenger> getPassengersBySeatsAscending() {
+    Passenger tempPassenger;
+    Integer tempSeat;
+    for (int i = 0; i < bookedPassengers.size() - 1; i++) {
+
+      for (int j = 1; j < bookedPassengers.size() - i; j++) {
+        if (bookedPassengers.get(j - 1).getSeatNumber() > bookedPassengers.get(j).getSeatNumber()) {
+          tempPassenger = bookedPassengers.get(j-1);
+          bookedPassengers.set((j-1), bookedPassengers.get(j));
+          bookedPassengers.set(j, tempPassenger);
+          tempSeat = allocatedSeats.get(j-1);
           allocatedSeats.set((j-1), allocatedSeats.get(j));
-          allocatedSeats.set(j, temp);
+          allocatedSeats.set(j, tempSeat);
         }
       }
     }
-    return allocatedSeats;
+    return bookedPassengers;
 
   }
 
   public Passenger getPassengerBySeatNumber(int seatNumber) {
+    this.bookedPassengers = getPassengersBySeatsAscending();
 
+    Passenger foundPassenger = binaryPassengerSearch(bookedPassengers, seatNumber);
+    return foundPassenger;
   }
+
+  private Passenger binaryPassengerSearch(ArrayList<Passenger> passengers, int seatNumber) {
+      if (passengers.size() == 0){
+        return null;
+      }
+
+      int midIndex = 0;
+      if (passengers.size() >1) {
+        midIndex = (int) Math.ceil((double) passengers.size() / 2);
+      }
+
+      Passenger midPoint = passengers.get(midIndex);
+
+      if (seatNumber == midPoint.getSeatNumber()){
+        return midPoint;
+      }
+
+      ArrayList<Passenger> newSearchArea;
+
+      if (seatNumber < midPoint.getSeatNumber()){
+        newSearchArea = new ArrayList<Passenger>(passengers.subList(0, midIndex));
+      } else {
+        newSearchArea = new ArrayList<Passenger>(passengers.subList(midIndex + 1, passengers.size()));
+      }
+    return binaryPassengerSearch(newSearchArea, seatNumber);
+  }
+
+
 
 }

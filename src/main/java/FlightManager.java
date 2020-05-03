@@ -41,7 +41,11 @@ public class FlightManager {
     return flight.getAllocatedSeats();
   }
 
-  public ArrayList<Integer> getSortedAllocatedSeats(Flight flight) {
-    return flight.getAllocatedSeatsAscending();
+  public ArrayList<Passenger> getSortedPassengersBySeatNum(Flight flight) {
+    return flight.getPassengersBySeatsAscending();
+  }
+
+  public Passenger getPassengerBySeatNumber(Flight flight, int seatNumber) {
+    return flight.getPassengerBySeatNumber(seatNumber);
   }
 }
