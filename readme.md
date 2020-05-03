@@ -45,26 +45,3 @@ Create a `FlightManager` class which has methods to:
 ### ***Super*** Extensions
 * Write a method in `FlightManager` to sort the passengers of a `Flight` by seat number by implementing a Bubble Sort
 * Write a method in `FlightManager` that uses a Binary Search to find a `Passenger` by seat number. Remember to use the previous method to sort the list first
-
-### PDA Reminder:
-
-As part of this homework you are required to take screenshots of the following:
-
-```
-- An example of encapsulation in a program.
-```
-
-Demonstrate testing in your program. Take screenshots of:
-
-```
-- Example of test code
-- The test code failing to pass
-- Example of the test code once errors have been corrected
-- The test code passing
-```
-
-- Go to your [PDA Checklist](https://github.com/codeclan/pda/tree/master/Evidence%20Gathering%20Portfolio)
-
-- Submit your PDA evidence (screenshots, etc.) to your own PDA repo
-
-- PDA Reference: I.T 1, P18
