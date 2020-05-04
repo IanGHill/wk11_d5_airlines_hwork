@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class FlightManagerTest {
 
@@ -81,10 +80,9 @@ public class FlightManagerTest {
     System.out.println("Passenger: " + eb420.getBookedPassengers().get(0).getName() + " Seat Num: " + eb420.getBookedPassengers().get(0).getSeatNumber()  );
     System.out.println("Passenger: " + eb420.getBookedPassengers().get(1).getName() + " Seat Num: " + eb420.getBookedPassengers().get(1).getSeatNumber()  );
     System.out.println("Passenger: " + eb420.getBookedPassengers().get(2).getName() + " Seat Num: " + eb420.getBookedPassengers().get(2).getSeatNumber()  );
-    testAllocatedSeats.add(1);
-    testAllocatedSeats.add(2);
-    testAllocatedSeats.add(3);
-    assertEquals(testAllocatedSeats, flightManager.getFlightAllocatedSeats(eb420));
+    assertEquals(1, eb420.getBookedPassengers().get(0).getSeatNumber());
+    assertEquals(2, eb420.getBookedPassengers().get(1).getSeatNumber());
+    assertEquals(3, eb420.getBookedPassengers().get(2).getSeatNumber());
   }
 
   @Test

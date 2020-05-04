@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -85,7 +84,6 @@ public class Flight {
     return allocatedSeat;
   }
 
-
   public int getBaggageWeightReserved() {
     return (getPlaneTotalWeight() / 2);
   }
@@ -98,35 +96,15 @@ public class Flight {
     return this.allocatedSeats;
   }
 
-//  public ArrayList<Integer> getAllocatedSeatsAscending() {
-//    int temp;
-//    for (int i = 0; i < allocatedSeats.size() - 1; i++) {
-//
-//      for (int j = 1; j < allocatedSeats.size() - i; j++) {
-//        if (allocatedSeats.get(j - 1) > allocatedSeats.get(j)) {
-//          temp = allocatedSeats.get(j-1);
-//          allocatedSeats.set((j-1), allocatedSeats.get(j));
-//          allocatedSeats.set(j, temp);
-//        }
-//      }
-//    }
-//    return allocatedSeats;
-//
-//  }
-
   public ArrayList<Passenger> getPassengersBySeatsAscending() {
     Passenger tempPassenger;
-    Integer tempSeat;
-    for (int i = 0; i < bookedPassengers.size() - 1; i++) {
 
+    for (int i = 0; i < bookedPassengers.size() - 1; i++) {
       for (int j = 1; j < bookedPassengers.size() - i; j++) {
         if (bookedPassengers.get(j - 1).getSeatNumber() > bookedPassengers.get(j).getSeatNumber()) {
           tempPassenger = bookedPassengers.get(j-1);
           bookedPassengers.set((j-1), bookedPassengers.get(j));
           bookedPassengers.set(j, tempPassenger);
-          tempSeat = allocatedSeats.get(j-1);
-          allocatedSeats.set((j-1), allocatedSeats.get(j));
-          allocatedSeats.set(j, tempSeat);
         }
       }
     }
